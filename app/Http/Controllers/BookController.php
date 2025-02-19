@@ -10,16 +10,16 @@ class BookController extends Controller
     // GET
     public function create() {
     
-        return view('books_create');
+        return view('books/books_create');
     }
 
     public function index() {
         $books = Book::all();
         
-        return view('books_index', compact('books'));
+        return view('books/books_index', compact('books'));
     }
 
-    // POST
+    // POST, PUT/PATCH, DELETE
     public function store(Request $request) {
         $book = Book::create($request->all());
         $book->save();
@@ -27,5 +27,10 @@ class BookController extends Controller
         return redirect()->route('books');
     }
 
+    public function update(Request $request, $bookId) {
+        $book = Book::findOrFail($bookId);
+        $book->update($request->except(['_token', '_method']));
     
+        return redirect()->route('books');
+    }    
 }
