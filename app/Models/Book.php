@@ -11,6 +11,8 @@ class Book extends Model
         'description',
         'author',
         'genre',
-        'rating'
+        'rating', // nullable
+        'is_finished', // nullable
+        'finished_reading_date' // nullable
     ];
 }

@@ -28,9 +28,17 @@ class BookController extends Controller
     }
 
     public function update(Request $request, $bookId) {
+        dd($request);
         $book = Book::findOrFail($bookId);
         $book->update($request->except(['_token', '_method']));
     
         return redirect()->route('books');
     }    
+
+    public function delete(Request $request, $bookId) {
+        $book = Book::findOrFail($bookId);
+        $book->delete();
+    
+        return redirect()->route('books');
+    }   
 }
