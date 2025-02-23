@@ -13,13 +13,13 @@
         <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Add a New Book</h1>
         <form action="{{ route('books/store') }}" method="POST" class="space-y-4">
             @csrf
-            <input type="text" name="title" id="title-input" placeholder="Title" 
+            <input type="text" name="title" id="title-input" placeholder="Title"
                 class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <input type="text" name="description" id="description-input" placeholder="Description" 
+            <input type="text" name="description" id="description-input" placeholder="Description"
                 class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <input type="text" name="author" id="author-input" placeholder="Author" 
+            <input type="text" name="author" id="author-input" placeholder="Author"
                 class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <select name="genre" id="genre-select" 
+            <select name="genre" id="genre-select"
                 class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                 <option value="Fiction">Fiction</option>
                 <option value="Mystery & Thriller">Mystery & Thriller</option>
@@ -42,12 +42,33 @@
                 <option value="Non-Fiction (General)">Non-Fiction (General)</option>
                 <option value="Classics">Classics</option>
             </select>
-            <input type="number" name="rating" id="rating-input" placeholder="Rating" 
-                class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <button type="submit" 
+            <label for="is-finished">Have you finished reading this book?</label>
+            <input type="checkbox" name="is_finished" id="is-finished-input">
+            <div id="is-finished-form-group" style="display: none;">
+                <input type="date" name="finished_reading_date" id="finished-reading-input" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <input type="number" name="rating" id="rating-input" placeholder="Rating" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <button type="submit"
                 class="w-full bg-blue-500 text-white p-3 rounded-lg font-semibold hover:bg-blue-600 transition">Submit</button>
         </form>
     </div>
+
+    <script>
+        window.onload = function() {
+            const $IS_FINISHED_INPUT = document.querySelector('#is-finished-input');
+            if ($IS_FINISHED_INPUT) {
+                $IS_FINISHED_INPUT.addEventListener('change', function() {
+                    const $IS_FINISHED_FORM_GROUP = document.querySelector('#is-finished-form-group');
+
+                    if ($IS_FINISHED_INPUT.checked == true) {
+                        $IS_FINISHED_FORM_GROUP.style.display = 'block';
+                    } else {
+                        $IS_FINISHED_FORM_GROUP.style.display = 'none';
+                    }
+                }, false);
+            }
+        }
+    </script>
 </body>
 
 </html>
